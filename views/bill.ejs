@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bill - AJ Crackers</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      .header {
+        text-align: center;
+        color: red;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .bill-info {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .bill-info h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: normal;
+      }
+      .bill-info p {
+        margin: 4px 0;
+        font-size: 14px;
+      }
+      .product-table {
+        width: 100%;
+        /* border-collapse: collapse; */
+      }
+      .product-table th {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .product-table td {
+        border-bottom: 1px solid black;
+      }
+    
+      .product-table th {
+        /* background-color: #f2f2f2; */
+      }
+      .product-table img {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>AJ Crackers</h1>
+      </div>
+      <div class="bill-info">
+        <p><strong>Name:</strong> <%= bill.customer.name %></p>
+        <p><strong>Address:</strong> <%= bill.customer.address %></p>
+        <p><strong>Contact:</strong> <%= bill.customer.contact %></p>
+        <p><strong>Email:</strong> <%= bill.customer.email %></p>
+      </div>
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bill.items.forEach(function(item) { %>
+          <tr style="padding: 4px;">
+            <td>
+              <br /><%= item.name %><br /><%= item.category %><br /><%= item.per
+              %>
+            </td>
+            <td><%= item.qty %></td>
+            <td>₹<%= item.price %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <!-- Footer Section -->
+      <div
+        style="
+          background-color: #000;
+          color: #fff;
+          padding: 10px;
+          margin-top: 20px;
+          width: 100%;
+          text-align: left;
+        "
+      >
+        <p style="text-align: right; font-size: 14px">
+          Sub Total (A) : ₹ <%= bill.subTotalA %>
+        </p>
+        <p style="text-align: right; font-size: 14px">
+          Discount (50% OFF) : ₹ <%= bill.discount %>
+        </p>
+        <p style="text-align: right; font-size: 14px">
+          Sub Total (B) : ₹ <%= bill.subTotalB %>
+        </p>
+        <p style="text-align: right; font-size: 14px">
+          Non Discounted Items : ₹ <%= bill.nonDiscountedItems %>
+        </p>
+        <hr style="border: 1px solid #333" />
+        <p
+          style="
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffc107;
+            text-align: right;
+          "
+        >
+          Grand Total : ₹ <%= bill.grandTotal %>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
